@@ -21,6 +21,7 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
+    "async": "^2.4.1",
     "node-opcua": "0.0.64"
   }
 }

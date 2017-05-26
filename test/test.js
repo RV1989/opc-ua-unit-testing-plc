@@ -1,7 +1,8 @@
 let opcua = require("node-opcua");
 let chai = require('chai');
 var client = new opcua.OPCUAClient();
-var endpointUrl = "opc.tcp://" + require("os").hostname() + ":4334/UA/MyLittleServer";
+var endpointUrl = "opc.tcp://localhost:4334/UA/MyLittleServer";
+const expect = chai.expect;
 
 // timer
 const timeout = function (delay) {
@@ -34,8 +35,10 @@ const createSession = async function () {
     return new Promise((resolve, reject) => {
         client.createSession(function (err, session) {
             if (!err) {
+                console.log("session created")
                 return resolve(session);
             } else {
+                console.log("failed to create session")
                 return reject(err)
             }
 
@@ -48,8 +51,8 @@ const readVar = async function (session, variable) {
 
         session.readVariableValue(variable, function (err, dataValue) {
             if (!err) {
-                console.log(dataValue.toString())
-                return resolve(dataValue.toString())
+                console.log(dataValue.value.value)
+                return resolve(dataValue.value.value)
 
             } else {
                 return reject(err)
@@ -60,19 +63,21 @@ const readVar = async function (session, variable) {
 }
 
 // test start here
-async function main() {
-    console.log("connecting");
-    await connect(endpointUrl);
-    let session = await createSession();
+ describe('Test',  () => {
+     let session
 
-    describe('Test',  () => {
-        it("Test free memory", async () => {
-            let readVal = await readVar(session, "ns=1;s=free_memory");
-            expect(readVal).to.equal("True");
+    before(async () => {
+        await connect(endpointUrl);
+        session = await createSession();
+          })
+
+        it("Test myvariable 2 is true", async () => {
+            //console.log("reading value")
+            let readVal = await readVar(session, "ns=1;s=MyVariable2");
+            expect(readVal).to.equal(true);
         });
     });
 
 
-}
 
-main()
+

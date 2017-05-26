@@ -44,24 +44,24 @@ function post_initialize() {
         });
         
         // add a variable named MyVariable2 to the newly created folder "MyDevice"
-        var variable2 = 10.0;
+        var variable2 = true;
         
         server.engine.addressSpace.addVariable({
             
             componentOf: device,
             
-            nodeId: "ns=1;b=1020FFAA", // some opaque NodeId in namespace 4
+            nodeId: "ns=1;s=MyVariable2", // some opaque NodeId in namespace 4
             
             browseName: "MyVariable2",
             
-            dataType: "Double",    
+            dataType: "Boolean",    
             
             value: {
                 get: function () {
-                    return new opcua.Variant({dataType: opcua.DataType.Double, value: variable2 });
+                    return new opcua.Variant({dataType: opcua.DataType.Boolean, value: variable2 });
                 },
                 set: function (variant) {
-                    variable2 = parseFloat(variant.value);
+                    variable2 = parseBoolean(variant.value);
                     return opcua.StatusCodes.Good;
                 }
             }

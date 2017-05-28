@@ -61,7 +61,7 @@ function post_initialize() {
                     return new opcua.Variant({dataType: opcua.DataType.Boolean, value: variable2 });
                 },
                 set: function (variant) {
-                    variable2 = parseBoolean(variant.value);
+                    variable2 = variant.value;
                     return opcua.StatusCodes.Good;
                 }
             }

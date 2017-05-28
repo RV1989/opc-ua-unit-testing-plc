@@ -62,7 +62,29 @@ const readVar = async function (session, variable) {
     });
 }
 
+const writeVar = async function (session,variable,dataToWrite){
+    return new Promise((resolve, reject) => {
+        session.writeSingleNode(variable,dataToWrite,function(err,stat){
+            if (!err) {
+                console.log(" write ok" );
+                return resolve()
+            } else {
+                console.log(" write err = " ,err);
+                return reject(err)
+            }
+
+
+        })
+
+
+    })
+
+
+
+}
+
 // test start here
+
  describe('Test',  () => {
      let session
 
@@ -73,11 +95,30 @@ const readVar = async function (session, variable) {
 
         it("Test myvariable 2 is true", async () => {
             //console.log("reading value")
+
+            let data = {
+                   dataType: "Boolean",
+                   value: true
+            };
+            await writeVar(session,"ns=1;s=MyVariable2",data)
+            await Promise.resolve(timeout(100));
             let readVal = await readVar(session, "ns=1;s=MyVariable2");
             expect(readVal).to.equal(true);
         });
-    });
+  it("Test myvariable 2 is false", async () => {
+            //console.log("reading value")
 
+            let data = {
+                   dataType: "Boolean",
+                   value: false
+            };
+            await writeVar(session,"ns=1;s=MyVariable2",data)
+            await Promise.resolve(timeout(100));
+            let readVal = await readVar(session, "ns=1;s=MyVariable2");
+            expect(readVal).to.equal(false);
+        });
+
+    });
 
 
 

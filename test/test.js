@@ -103,7 +103,7 @@ const writeVar = async function (session,variable,dataToWrite){
             await writeVar(session,"ns=1;s=MyVariable2",data)
             await Promise.resolve(timeout(100));
             let readVal = await readVar(session, "ns=1;s=MyVariable2");
-            expect(readVal).to.equal(true);
+            expect(readVal).to.be.true
         });
   it("Test myvariable 2 is false", async () => {
             //console.log("reading value")
@@ -114,8 +114,10 @@ const writeVar = async function (session,variable,dataToWrite){
             };
             await writeVar(session,"ns=1;s=MyVariable2",data)
             await Promise.resolve(timeout(100));
-            let readVal = await readVar(session, "ns=1;s=MyVariable2");
-            expect(readVal).to.equal(false);
+            let var2 = await readVar(session, "ns=1;s=MyVariable2");
+            let var1 = await readVar(session, "ns=1;s=MyVariable1");
+            expect(var2).to.be.false
+            expect(var1).to.be.false;
         });
 
     });

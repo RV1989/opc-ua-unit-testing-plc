@@ -27,18 +27,17 @@ function post_initialize() {
         
         // add some variables 
         // add a variable named MyVariable1 to the newly created folder "MyDevice"
-        var variable1 = 1;
-        
-        // emulate variable1 changing every 500 ms
-        setInterval(function(){  variable1+=1; }, 500);
+        var variable1 = true;
+
         
         addressSpace.addVariable({
             componentOf: device,
+            nodeId: "ns=1;s=MyVariable1",
             browseName: "MyVariable1",
-            dataType: "Double",
+            dataType: "Boolean",
             value: {
                 get: function () {
-                    return new opcua.Variant({dataType: opcua.DataType.Double, value: variable1 });
+                    return new opcua.Variant({dataType: opcua.DataType.Boolean, value: variable1 });
                 }
             }
         });

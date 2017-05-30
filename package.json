@@ -4,7 +4,7 @@
   "description": "unit testing with opc ua",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter mochawesome"
+    "test": "mocha --reporter mochawesome --timeout 50000"
   },
   "repository": {
     "type": "git",

@@ -4,7 +4,8 @@
   "description": "unit testing with opc ua",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter mochawesome --timeout 50000"
+    "test": "mocha --reporter mochawesome --timeout 50000",
+    "test-drive": "mocha test/testDrive.js --reporter mochawesome --timeout 50000"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
   },
   "dependencies": {
     "async": "^2.4.1",
-    "node-opcua": "0.0.64"
+    "node-opcua": "0.0.64",
+    "prompt": "^1.0.0",
+    "readline-sync": "^1.4.9"
   }
 }

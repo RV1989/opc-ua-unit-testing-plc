@@ -85,65 +85,99 @@ const writeVar = async function(session, variable, dataToWrite) {
   });
 };
 
-let drivesUfr07 = [
-  { name: "RC 39150", hwId: 650 },
-  { name: "RC 39190", hwId: 651 },
-  { name: "RC 39070", hwId: 652 },
-  { name: "RC 39071", hwId: 653 },
-  { name: "Turn 39071", hwId: 654 },
-  { name: "RC 39072", hwId: 655 },
-  { name: "RC 39073", hwId: 657 },
-  { name: "RC 39080", hwId: 658 },
-  { name: "Turn 39080", hwId: 659 },
-  { name: "RC 39081", hwId: 660 },
-  { name: "RC 39082", hwId: 661 },
-  { name: "RC 39083", hwId: 662 }
+let drivesXa02Gate1 = [
+  { name: "RC 02020", hwId: 293 },
+  { name: "RC 02021", hwId: 416 },
+  { name: "RC 02030", hwId: 417 },
+  { name: "RC 02031", hwId: 418 },
+  { name: "RC 02040", hwId: 419 },
+  { name: "RC 02041", hwId: 420 },
+  { name: "RC 02050", hwId: 421 },
+  { name: "RC 02051", hwId: 422 },
+  { name: "RC 02060", hwId: 423 },
+  { name: "RC 02061", hwId: 424 },
+  { name: "RC 02070", hwId: 425 },
+  { name: "RC 02071", hwId: 426 },
+  { name: "RC 02080", hwId: 427 },
+  { name: "RC 02081", hwId: 428 }
 ];
 
-let drivesUfr08 = [
-  { name: "Dummy 39120-03", hwId: 671 },
-  { name: "RC 39090", hwId: 686 },
-  { name: "RC 39091", hwId: 687 },
-  { name: "Turn 39091", hwId: 688 },
-  { name: "RC 39092", hwId: 689 },
-  { name: "RC 39093", hwId: 690 },
-  { name: "RC 39100", hwId: 691 },
-  { name: "Turn 39100", hwId: 692 },
-  { name: "RC 39101", hwId: 693 },
-  { name: "RC 39102", hwId: 694 },
-  { name: "Dummy 39110-3", hwId: 695 },
-  { name: "RC 39110", hwId: 696 },
-  { name: "Turn 39110", hwId: 697 },
-  { name: "RC 39111", hwId: 698 }
+let drivesXa02Gate2 = [
+  { name: "Rc 02090", hwId: 438 },
+  { name: "RC 02091", hwId: 440 },
+  { name: "RC 02100", hwId: 441 },
+  { name: "RC 02101", hwId: 442 },
+  { name: "RC 02110", hwId: 443 },
+  { name: "RC 02111", hwId: 444 },
+  { name: "RC 02120", hwId: 445 },
+  { name: "RC 02121", hwId: 446 },
+  { name: "RC 02130", hwId: 447 },
+  { name: "RC 02131", hwId: 448 },
+  { name: "RC 02140", hwId: 449 },
+  { name: "RC 02141", hwId: 450 },
+  { name: "RC 02142", hwId: 451 },
+  { name: "RC 02143", hwId: 452 }
 ];
 
-let drivesUfr09 = [
-  { name: "Dummy 39350-03", hwId: 710 },
-  { name: "RC 39350", hwId: 740 },
-  { name: "Turn 39350", hwId: 741 },
-  { name: "RC 39351", hwId: 742 },
-  { name: "RC 39352", hwId: 743 },
-  { name: "RC 39353", hwId: 744 },
-  { name: "RC 39360", hwId: 745 },
-  { name: "Turn 39360", hwId: 746 },
-  { name: "Dummy 39360-3", hwId: 747 },
-  { name: "Dummy 39362-1-2", hwId: 748 },
-  { name: "RC 39400", hwId: 749 },
-  { name: "RC 39401", hwId: 750 },
-  { name: "Turn 39401", hwId: 751 },
-  { name: "Turn 39402", hwId: 752 }
+let drivesXa02Gate3 = [
+  { name: "RC 02144", hwId: 462 },
+  { name: "RC 02145", hwId: 464 },
+  { name: "RC 02146", hwId: 465 },
+  { name: "RC 02147", hwId: 466 },
+  { name: "RC 02150", hwId: 467 },
+  { name: "RC 02151", hwId: 468 },
+  { name: "RC 02152", hwId: 469 },
+  { name: "Rc 02153", hwId: 470 },
+  { name: "RC 02154", hwId: 471 },
+  { name: "Rc 02155", hwId: 472 },
+  { name: "RC 02156", hwId: 473 },
+  { name: "RC 02157", hwId: 474 },
+  { name: "Rc 02160", hwId: 475 },
+  { name: "RC 02161", hwId: 476 }
+];
+let drivesXa02Gate4 = [
+  { name: "RC 02162", hwId: 486 },
+  { name: "RC 02170", hwId: 488 },
+  { name: "RC 02180", hwId: 489 },
+  { name: "RC 02171", hwId: 490 },
+  { name: "RC 02181", hwId: 491 },
+  { name: "RC 02172", hwId: 492 },
+  { name: "RC 02210", hwId: 493 },
+  { name: "Rc 02211", hwId: 494 },
+  { name: "RC 02212", hwId: 495 },
+  { name: "Rc 02213", hwId: 496 },
+  { name: "RC 02214", hwId: 497 },
+  { name: "RC 02215", hwId: 498 },
+  { name: "Rc 02216", hwId: 499 },
+  { name: "RC 02217", hwId: 500 }
+];
+let drivesXa02Gate5 = [
+  { name: "RC 02218", hwId: 510 },
+  { name: "RC 02219", hwId: 512 },
+  { name: "RC 02230", hwId: 513 },
+  { name: "RC 02231", hwId: 514 },
+  { name: "RC 02240", hwId: 515 },
+  { name: "RC 02241", hwId: 516 },
+  { name: "RC 02242", hwId: 517 },
+  { name: "Rc 02250", hwId: 518 },
+  { name: "RC 02251", hwId: 519 },
+  { name: "Rc 02252", hwId: 520 },
+  { name: "RC 02253", hwId: 521 },
+  { name: "RC 02260", hwId: 522 },
+  { name: "Rc 02261", hwId: 523 },
+  { name: "RC 02262", hwId: 524 }
 ];
 
-let drivesUfr10 = [
-  { name: "RC 39403", hwId: 762 },
-  { name: "RC 39404", hwId: 807 },
-  { name: "RC 39420", hwId: 808 },
-  { name: "Turn 39420", hwId: 809 },
-  { name: "RC 39410", hwId: 810 },
-  { name: "RC 39420-3", hwId: 811 }
+let drivesXa02Gate6 = [
+  { name: "RC 02263", hwId: 534 },
+  { name: "RC 02264", hwId: 536 },
+  { name: "RC 02265", hwId: 537 },
+  { name: "RC 02190", hwId: 538 },
+  { name: "RPortique 02310-01", hwId: 539 },
+  { name: "RPortique 02310-02", hwId: 540 },
 ];
 
-let allUfr = [drivesUfr07, drivesUfr08, drivesUfr09, drivesUfr10];
+let allUfr = [drivesXa02Gate1,drivesXa02Gate2,drivesXa02Gate3,drivesXa02Gate4,drivesXa02Gate5,drivesXa02Gate6];
 
 describe("Drive Test", () => {
   let session;

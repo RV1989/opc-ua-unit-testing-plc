@@ -2,8 +2,100 @@ let opcua = require("node-opcua");
 let chai = require("chai");
 let readline = require("readline-sync");
 var client = new opcua.OPCUAClient();
-var endpointUrl = "opc.tcp://192.168.161.215:4840";
 const expect = chai.expect;
+
+var endpointUrl = "opc.tcp://172.16.3.1:4840";
+
+const maxSpeed =2500
+const ramp = 2000
+let drivesXa02Gate1 = [
+  { name: "RC 03290", hwId: 477 },
+  { name: "RC 03291", hwId: 479 },
+  { name: "RC 03230", hwId: 480 },
+  { name: "RC 03160", hwId: 481 },
+  { name: "RC 03300", hwId: 482 },
+  { name: "RC 03301", hwId: 483 },
+  { name: "RC 03240", hwId: 484 },
+  { name: "RC 03170", hwId: 485 },
+  { name: "RC 03310", hwId: 486 },
+  { name: "RC 03311", hwId: 487 },
+  { name: "RC 03250", hwId: 488 },
+  { name: "RC 03180", hwId: 489 },
+  { name: "RC 03193", hwId: 490 },
+  { name: "lift-garant-03230", hwId: 491 },
+  { name: "lift-garant-03240", hwId: 492 },
+  { name: "lift-garant-03250", hwId: 493 },
+];
+
+let drivesXa02Gate2 = [
+  { name: "Rc 03192", hwId: 501 },
+  { name: "RC 03191", hwId: 503 },
+  { name: "RC 03190", hwId: 504 },
+  { name: "RC 03320", hwId: 505 },
+  { name: "RC 03321", hwId: 506 },
+  { name: "RC 03260", hwId: 507 },
+  { name: "RC 03200", hwId: 508 },
+  { name: "RC 03330", hwId: 509 },
+  { name: "RC 03331", hwId: 510 },
+  { name: "RC 03270", hwId: 511 },
+  { name: "RC 03210", hwId: 512 },
+  { name: "RC 03340", hwId: 513 },
+  { name: "RC 03341", hwId: 514 },
+  { name: "RC 03280", hwId: 515 },
+  { name: "RC lift-garant-03260", hwId: 516 },
+  { name: "RC lift-garant-03270", hwId: 517 },
+ 
+];
+
+let drivesXa02Gate3 = [
+  { name: "RC 03220", hwId: 540 },
+  { name: "RC lift-garant-03280", hwId: 541 },
+
+];
+let drivesXa02Gate4 = [
+  { name: "RC 02162", hwId: 486 },
+  { name: "RC 02170", hwId: 488 },
+  { name: "RC 02180", hwId: 489 },
+  { name: "RC 02171", hwId: 490 },
+  { name: "RC 02181", hwId: 491 },
+  { name: "RC 02172", hwId: 492 },
+  { name: "RC 02210", hwId: 493 },
+  { name: "Rc 02211", hwId: 494 },
+  { name: "RC 02212", hwId: 495 },
+  { name: "Rc 02213", hwId: 496 },
+  { name: "RC 02214", hwId: 497 },
+  { name: "RC 02215", hwId: 498 },
+  { name: "Rc 02216", hwId: 499 },
+  { name: "RC 02217", hwId: 500 }
+];
+let drivesXa02Gate5 = [
+  { name: "RC 02218", hwId: 510 },
+  { name: "RC 02219", hwId: 512 },
+  { name: "RC 02230", hwId: 513 },
+  { name: "RC 02231", hwId: 514 },
+  { name: "RC 02240", hwId: 515 },
+  { name: "RC 02241", hwId: 516 },
+  { name: "RC 02242", hwId: 517 },
+  { name: "Rc 02250", hwId: 518 },
+  { name: "RC 02251", hwId: 519 },
+  { name: "Rc 02252", hwId: 520 },
+  { name: "RC 02253", hwId: 521 },
+  { name: "RC 02260", hwId: 522 },
+  { name: "Rc 02261", hwId: 523 },
+  { name: "RC 02262", hwId: 524 }
+];
+
+let drivesXa02Gate6 = [
+  { name: "RC 02263", hwId: 534 },
+  { name: "RC 02264", hwId: 536 },
+  { name: "RC 02265", hwId: 537 },
+  { name: "RC 02190", hwId: 538 },
+  { name: "RPortique 02310-01", hwId: 539 },
+  { name: "RPortique 02310-02", hwId: 540 },]
+
+
+ let allUfr = [drivesXa02Gate1,drivesXa02Gate2, drivesXa02Gate3];
+
 
 // timer
 const onDelay = function(delay) {
@@ -85,99 +177,7 @@ const writeVar = async function(session, variable, dataToWrite) {
   });
 };
 
-let drivesXa02Gate1 = [
-  { name: "RC 02020", hwId: 293 },
-  { name: "RC 02021", hwId: 416 },
-  { name: "RC 02030", hwId: 417 },
-  { name: "RC 02031", hwId: 418 },
-  { name: "RC 02040", hwId: 419 },
-  { name: "RC 02041", hwId: 420 },
-  { name: "RC 02050", hwId: 421 },
-  { name: "RC 02051", hwId: 422 },
-  { name: "RC 02060", hwId: 423 },
-  { name: "RC 02061", hwId: 424 },
-  { name: "RC 02070", hwId: 425 },
-  { name: "RC 02071", hwId: 426 },
-  { name: "RC 02080", hwId: 427 },
-  { name: "RC 02081", hwId: 428 }
-];
 
-let drivesXa02Gate2 = [
-  { name: "Rc 02090", hwId: 438 },
-  { name: "RC 02091", hwId: 440 },
-  { name: "RC 02100", hwId: 441 },
-  { name: "RC 02101", hwId: 442 },
-  { name: "RC 02110", hwId: 443 },
-  { name: "RC 02111", hwId: 444 },
-  { name: "RC 02120", hwId: 445 },
-  { name: "RC 02121", hwId: 446 },
-  { name: "RC 02130", hwId: 447 },
-  { name: "RC 02131", hwId: 448 },
-  { name: "RC 02140", hwId: 449 },
-  { name: "RC 02141", hwId: 450 },
-  { name: "RC 02142", hwId: 451 },
-  { name: "RC 02143", hwId: 452 }
-];
-
-let drivesXa02Gate3 = [
-  { name: "RC 02144", hwId: 462 },
-  { name: "RC 02145", hwId: 464 },
-  { name: "RC 02146", hwId: 465 },
-  { name: "RC 02147", hwId: 466 },
-  { name: "RC 02150", hwId: 467 },
-  { name: "RC 02151", hwId: 468 },
-  { name: "RC 02152", hwId: 469 },
-  { name: "Rc 02153", hwId: 470 },
-  { name: "RC 02154", hwId: 471 },
-  { name: "Rc 02155", hwId: 472 },
-  { name: "RC 02156", hwId: 473 },
-  { name: "RC 02157", hwId: 474 },
-  { name: "Rc 02160", hwId: 475 },
-  { name: "RC 02161", hwId: 476 }
-];
-let drivesXa02Gate4 = [
-  { name: "RC 02162", hwId: 486 },
-  { name: "RC 02170", hwId: 488 },
-  { name: "RC 02180", hwId: 489 },
-  { name: "RC 02171", hwId: 490 },
-  { name: "RC 02181", hwId: 491 },
-  { name: "RC 02172", hwId: 492 },
-  { name: "RC 02210", hwId: 493 },
-  { name: "Rc 02211", hwId: 494 },
-  { name: "RC 02212", hwId: 495 },
-  { name: "Rc 02213", hwId: 496 },
-  { name: "RC 02214", hwId: 497 },
-  { name: "RC 02215", hwId: 498 },
-  { name: "Rc 02216", hwId: 499 },
-  { name: "RC 02217", hwId: 500 }
-];
-let drivesXa02Gate5 = [
-  { name: "RC 02218", hwId: 510 },
-  { name: "RC 02219", hwId: 512 },
-  { name: "RC 02230", hwId: 513 },
-  { name: "RC 02231", hwId: 514 },
-  { name: "RC 02240", hwId: 515 },
-  { name: "RC 02241", hwId: 516 },
-  { name: "RC 02242", hwId: 517 },
-  { name: "Rc 02250", hwId: 518 },
-  { name: "RC 02251", hwId: 519 },
-  { name: "Rc 02252", hwId: 520 },
-  { name: "RC 02253", hwId: 521 },
-  { name: "RC 02260", hwId: 522 },
-  { name: "Rc 02261", hwId: 523 },
-  { name: "RC 02262", hwId: 524 }
-];
-
-let drivesXa02Gate6 = [
-  { name: "RC 02263", hwId: 534 },
-  { name: "RC 02264", hwId: 536 },
-  { name: "RC 02265", hwId: 537 },
-  { name: "RC 02190", hwId: 538 },
-  { name: "RPortique 02310-01", hwId: 539 },
-  { name: "RPortique 02310-02", hwId: 540 },
-];
-
-let allUfr = [drivesXa02Gate1,drivesXa02Gate2,drivesXa02Gate3,drivesXa02Gate4,drivesXa02Gate5,drivesXa02Gate6];
 
 describe("Drive Test", () => {
   let session;
@@ -210,23 +210,23 @@ describe("Drive Test", () => {
 
   for (let ufr of allUfr){
   for (let drive of ufr) {
-    it("Drive " + drive.name + " Speed should be 1500 ", async () => {
+    it("Drive " + drive.name + " Speed should be "+ maxSpeed, async () => {
       let hwID = {
         dataType: "UInt16",
         value: drive.hwId
       };
       let Speed = {
         dataType: "Int16",
-        value: 1500
+        value: maxSpeed
       };
       // write hw id
       await writeVar(session, tagHwId, hwID);
       await writeVar(session, tagSpeed, Speed);
       await writeVar(session, tagForward, bool_true);
-      await onDelay(1000);
-      //askOkSpeed1500();
+      await onDelay(ramp + 500);
+      //askOkSpeed1500(drive.name);
       let actualSpeed = await readVar(session, tagActualSpeed);
-      expect(actualSpeed).to.be.above(1490);
+      expect(actualSpeed).to.be.above(maxSpeed-50);
     });
 
     it("Drive " + drive.name + " Speed should be 0", async () => {
@@ -237,19 +237,20 @@ describe("Drive Test", () => {
       // write hw id
       await writeVar(session, tagHwId, hwID);
       await writeVar(session, tagForward, bool_false);
-      await onDelay(1100);
-      //askOkSpeed0();
+      await onDelay(ramp + 500);
+      //askOkSpeed0(drive.name);
       let actualSpeed = await readVar(session, tagActualSpeed);
       expect(actualSpeed).to.be.equal(0);
     });
+ 
   }
 }
 });
 
-function askOkSpeed1500() {
-  return readline.question("Drive speed=1500 & contactor?");
+function askOkSpeed1500(drivename) {
+  return readline.question(drivename +" speed= " +maxSpeed+" & contactor?");
 }
 
-function askOkSpeed0() {
-  return readline.question("Drive speed=0 & contactor off?");
+function askOkSpeed0(drivename) {
+  return readline.question(drivename+" speed= 0 & contactor off?");
 }

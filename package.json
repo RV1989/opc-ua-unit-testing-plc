@@ -23,7 +23,7 @@
     "mochawesome": "^2.2.0"
   },
   "dependencies": {
-    "async": "^2.4.1",
+    "async": "^3.2.2",
     "node-opcua": "0.0.64",
     "prompt": "^1.0.0",
     "readline-sync": "^1.4.9"

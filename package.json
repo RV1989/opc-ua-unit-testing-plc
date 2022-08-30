@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "async": "^2.4.1",
-    "node-opcua": "0.0.64",
+    "node-opcua": "2.74.0",
     "prompt": "^1.0.0",
     "readline-sync": "^1.4.9"
   }

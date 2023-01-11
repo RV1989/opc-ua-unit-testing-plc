@@ -19,7 +19,7 @@
   "homepage": "https://github.com/RV1989/opc-ua-unit-testing-plc#readme",
   "devDependencies": {
     "chai": "^4.0.0",
-    "mocha": "^3.5.3",
+    "mocha": "^10.2.0",
     "mochawesome": "^2.2.0"
   },
   "dependencies": {
